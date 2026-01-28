@@ -2,6 +2,8 @@ package framework.driver;
 
 import com.microsoft.playwright.*;
 import framework.config.ConfigLoader;
+import framework.constants.BrowserName;
+import framework.constants.ConfigKeys;
 
 import java.nio.file.Paths;
 
@@ -15,10 +17,10 @@ public class PlayWrightFactory {
         BrowserType browserType;
 
         playwright = Playwright.create();
-        boolean headless = Boolean.parseBoolean(ConfigLoader.get("headless"));
+        boolean headless = Boolean.parseBoolean(ConfigLoader.get(ConfigKeys.HEADLESS));
 
         try {
-            browserName = BrowserName.valueOf(ConfigLoader.get("browser").toUpperCase());
+            browserName = BrowserName.valueOf(ConfigLoader.get(ConfigKeys.BROWSER).toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid browser in properties file", e);
         }

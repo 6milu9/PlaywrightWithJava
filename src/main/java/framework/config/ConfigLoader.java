@@ -1,5 +1,7 @@
 package framework.config;
 
+import framework.constants.ConfigKeys;
+
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -7,7 +9,7 @@ public final class ConfigLoader {
     private static final Properties props = new Properties();
 
     static {
-        String env = System.getProperty("env", "qa");
+        String env = System.getProperty(ConfigKeys.ENV, ConfigKeys.QA);
         String fileName = env + ".properties";
         try (InputStream is =
                      ConfigLoader.class
@@ -31,6 +33,6 @@ public final class ConfigLoader {
     }
 
     public static String get(String key) {
-        return props.getProperty(key);
+        return System.getProperty(key, props.getProperty(key));
     }
 }

@@ -1,4 +1,4 @@
-package framework.driver;
+package framework.constants;
 
 public enum BrowserName {
     CHROMIUM,
