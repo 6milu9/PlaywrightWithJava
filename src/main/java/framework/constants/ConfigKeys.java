@@ -6,6 +6,14 @@ public class ConfigKeys {
         // prevent instantiation
     }
 
+    //Boolean string
+    public static final String TRUE = "true";
+    public static final String FALSE = "false";
+
+    //String type
+    public static final String TYPE_URL = "URL";
+    public static final String TYPE_SELECTOR = "Selector";
+
     // Timeouts
     public static final int DEFAULT_TIMEOUT = 30;
     public static final int SHORT_TIMEOUT = 5;

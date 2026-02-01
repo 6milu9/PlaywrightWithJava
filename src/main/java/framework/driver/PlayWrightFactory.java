@@ -17,7 +17,10 @@ public class PlayWrightFactory {
         BrowserType browserType;
 
         playwright = Playwright.create();
-        boolean headless = Boolean.parseBoolean(ConfigLoader.get(ConfigKeys.HEADLESS));
+        boolean headless = Boolean.parseBoolean(
+                (ConfigLoader.get(ConfigKeys.HEADLESS).isEmpty() || ConfigLoader.get(ConfigKeys.HEADLESS).isBlank())
+                        ? ConfigKeys.TRUE
+                        : ConfigLoader.get(ConfigKeys.HEADLESS));
 
         try {
             browserName = BrowserName.valueOf(ConfigLoader.get(ConfigKeys.BROWSER).toUpperCase());
