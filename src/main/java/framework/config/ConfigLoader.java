@@ -33,4 +33,9 @@ public final class ConfigLoader {
     public static String get(String key) {
         return System.getProperty(key, props.getProperty(key));
     }
+
+    public static boolean getBoolean(String key, boolean def) {
+        String v = get(key);
+        return v.isBlank() ? def : Boolean.parseBoolean(v);
+    }
 }

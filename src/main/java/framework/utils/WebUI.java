@@ -29,51 +29,53 @@ public final class WebUI {
         page().navigate(url);
     }
 
-    private static Locator getElement(String selector, SelectorType selectorType) {
+    private static Locator getElement(SelectorType selectorType, String selector) {
         validate(selector, ConfigKeys.TYPE_SELECTOR);
         switch (selectorType) {
-            case ROLE -> {
+            case ROLE:
                 return page().getByRole(AriaRole.valueOf(selector));
-            }
-            case TEXT -> {
+
+            case TEXT:
                 return page().getByText(selector);
-            }
-            case LABEL -> {
+
+            case LABEL:
                 return page().getByLabel(selector);
-            }
-            case PLACEHOLDER -> {
+
+            case PLACEHOLDER:
                 return page().getByPlaceholder(selector);
-            }
-            case ALTTEXT -> {
+
+            case ALTTEXT:
                 return page().getByAltText(selector);
-            }
-            case TITLE -> {
+
+            case TITLE:
                 return page().getByTitle(selector);
-            }
-            case TESTID -> {
+
+            case TESTID:
                 return page().getByTestId(selector);
-            }
-            case CSS -> {
+
+            case CSS:
                 return page().locator("css=" + selector);
-            }
-            case XPATH -> {
+
+            case XPATH:
                 return page().locator("xpath=" + selector);
-            }
-            default -> throw new IllegalArgumentException(
-                    "Invalid selector type: " + selectorType + "."
-            );
+
+            default:
+                throw new IllegalArgumentException(
+                        "Invalid selector type: " + selectorType + "."
+                );
         }
+
     }
 
-    public static void click(String selector, SelectorType selectorType) {
-        getElement(selector, selectorType).click();
+    public static void click(SelectorType selectorType, String selector) {
+        getElement(selectorType, selector).click();
     }
 
-    public static void type(String selector, String text, SelectorType selectorType) {
-        getElement(selector, selectorType).fill(text);
+    public static void type(SelectorType selectorType, String selector, String text) {
+        getElement(selectorType, selector).fill(text);
     }
 
-    public static String getText(String selector, SelectorType selectorType) {
-        return getElement(selector, selectorType).textContent();
+    public static String getText(SelectorType selectorType, String selector) {
+        return getElement(selectorType, selector).textContent();
     }
 }

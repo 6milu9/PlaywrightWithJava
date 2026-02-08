@@ -7,7 +7,7 @@ import framework.constants.ConfigKeys;
 
 import java.nio.file.Paths;
 
-public class PlayWrightFactory {
+public class PlaywrightFactory {
     private Playwright playwright;
     private Browser browser;
     private BrowserContext context;
@@ -23,16 +23,26 @@ public class PlayWrightFactory {
                         : ConfigLoader.get(ConfigKeys.HEADLESS));
 
         try {
-            browserName = BrowserName.valueOf(ConfigLoader.get(ConfigKeys.BROWSER).toUpperCase());
+            browserName = (ConfigLoader.get(ConfigKeys.HEADLESS).isEmpty() || ConfigLoader.get(ConfigKeys.HEADLESS).isBlank())
+                    ? BrowserName.CHROMIUM
+                    : BrowserName.valueOf(ConfigLoader.get(ConfigKeys.BROWSER).toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid browser in properties file", e);
         }
 
-        browserType = switch (browserName) {
-            case CHROMIUM -> playwright.chromium();
-            case FIREFOX -> playwright.firefox();
-            case WEBKIT -> playwright.webkit();
-        };
+        switch (browserName) {
+            case CHROMIUM:
+                browserType = playwright.chromium();
+                break;
+            case FIREFOX:
+                browserType = playwright.firefox();
+                break;
+            case WEBKIT:
+                browserType = playwright.webkit();
+                break;
+            default:
+                throw new IllegalArgumentException("Unsupported browser: " + browserName);
+        }
 
         browser = browserType.launch(new BrowserType.LaunchOptions().setHeadless(headless));
 
