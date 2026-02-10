@@ -1,7 +1,7 @@
 <suite name="Playwright Suite" parallel="methods" thread-count="3">
 
     <listeners>
-<!--        <listener class-name="framework.listeners.TestListener"/>-->
+        <listener class-name="framework.listeners.TestListener"/>
         <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
     </listeners>
 
