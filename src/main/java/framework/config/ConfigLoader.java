@@ -1,7 +1,7 @@
 package framework.config;
 
 import framework.constants.ConfigKeys;
-import framework.constants.RunningEnvironment;
+import framework.enums.RunningEnvironment;
 
 import java.io.InputStream;
 import java.util.Properties;

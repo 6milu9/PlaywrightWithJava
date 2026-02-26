@@ -1,9 +1,9 @@
 package framework.tests.base;
 
+import com.microsoft.playwright.Page;
 import framework.config.ConfigLoader;
 import framework.constants.ConfigKeys;
 import framework.driver.PlaywrightFactory;
-import framework.listeners.TestListener;
 import framework.utils.WebUI;
 import io.qameta.allure.testng.AllureTestNg;
 import org.testng.ITestResult;
@@ -13,11 +13,15 @@ import org.testng.annotations.Listeners;
 
 
 @Listeners({
-        TestListener.class,
         AllureTestNg.class
 })
 public class BaseTest {
     protected PlaywrightFactory factory;
+    protected static ThreadLocal<Page> page = new ThreadLocal<>();
+
+    public static Page getPage() {
+        return page.get();
+    }
 
     @BeforeMethod
     public void setUp() {

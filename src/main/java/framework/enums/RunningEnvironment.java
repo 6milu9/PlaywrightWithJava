@@ -1,4 +1,4 @@
-package framework.constants;
+package framework.enums;
 
 public enum RunningEnvironment {
     QA("qa"),

@@ -2,7 +2,7 @@ package framework.driver;
 
 import com.microsoft.playwright.*;
 import framework.config.ConfigLoader;
-import framework.constants.BrowserName;
+import framework.enums.BrowserName;
 import framework.constants.ConfigKeys;
 
 import java.nio.file.Paths;
